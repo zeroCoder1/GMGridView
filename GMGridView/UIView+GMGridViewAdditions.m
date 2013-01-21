@@ -43,21 +43,39 @@
 {
     if (enabled) 
     {
-        CGFloat rotation = 0.03;
+//        CGFloat rotation = 0.01;
+//        
+//        CABasicAnimation *shake = [CABasicAnimation animationWithKeyPath:@"transform"];
+//        shake.duration = 0.3; //0.13
+//        shake.autoreverses = YES;
+//        shake.repeatCount  = MAXFLOAT;
+//        shake.removedOnCompletion = NO;
+//        shake.fromValue = [NSValue valueWithCATransform3D:CATransform3DRotate(self.layer.transform,-rotation, 0.0 ,0.0 ,1.0)];
+//        shake.toValue   = [NSValue valueWithCATransform3D:CATransform3DRotate(self.layer.transform, rotation, 0.0 ,0.0 ,1.0)];
+//        
+//        [self.layer addAnimation:shake forKey:@"shakeAnimation"];
         
-        CABasicAnimation *shake = [CABasicAnimation animationWithKeyPath:@"transform"];
-        shake.duration = 0.13;
-        shake.autoreverses = YES;
-        shake.repeatCount  = MAXFLOAT;
+        CABasicAnimation* shake = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+        shake.duration = .3;
+        shake.toValue = [NSNumber numberWithFloat:.95];
         shake.removedOnCompletion = NO;
-        shake.fromValue = [NSValue valueWithCATransform3D:CATransform3DRotate(self.layer.transform,-rotation, 0.0 ,0.0 ,1.0)];
-        shake.toValue   = [NSValue valueWithCATransform3D:CATransform3DRotate(self.layer.transform, rotation, 0.0 ,0.0 ,1.0)];
-        
+        shake.fillMode = kCAFillModeForwards;
+        self.layer.shouldRasterize = YES;
+        self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
         [self.layer addAnimation:shake forKey:@"shakeAnimation"];
+
+        
     }
     else
     {
-        [self.layer removeAnimationForKey:@"shakeAnimation"];
+        CABasicAnimation* shake = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+        shake.duration = .3;
+        shake.fromValue = [NSNumber numberWithFloat:0.95];
+        shake.removedOnCompletion = YES;
+        shake.fillMode = kCAFillModeBackwards;
+        [self.layer addAnimation:shake forKey:@"shakeAnimation"];
+        
+        //[self.layer removeAnimationForKey:@"shakeAnimation"];
     }
 }
 
