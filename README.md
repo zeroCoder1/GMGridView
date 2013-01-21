@@ -1,10 +1,9 @@
 * Added scroll view delegate methods, now one can enable pull to refresh.
 * Changed grid shaking animation.
-* press and hold to edit and move 
-(should have gridView.enableEditOnLongPress=YES; in  
-- (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index{ }
+* Press and hold to edit and move 
+(should have gridView.enableEditOnLongPress=YES; in - (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index{ }
 )
-
+* Disabling adding and moving cells to certain location.  
 
 
 
